@@ -1,48 +1,89 @@
-// menu.service.ts
-import { Injectable } from '@angular/core';
-
-export interface RouteInfo {
-  path: string;
-  title: string;
-  type: string;
-  icontype: string;
-  collapse?: string;
-  children?: ChildrenItems[];
-  securitylvl: number;
-}
-
-export interface ChildrenItems {
-  path: string;
-  title: string;
-  ab: string;
-  type?: string;
-}
+import { Injectable, OnDestroy, signal } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { MenuItem, SubMenuItem } from '../models/menu.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MenuService {
-  private ROUTES: RouteInfo[] = [
-    // Same ROUTES array as provided, omitted for brevity
-  ];
+export class MenuService implements OnDestroy {
+  private _showSidebar = signal(true);
+  private _showMobileMenu = signal(false);
+  private _pagesMenu = signal<MenuItem[]>([]);
+  private _subscription = new Subscription();
 
-  getMenuItems(): RouteInfo[] {
-    return this.ROUTES;
+  constructor(private router: Router) {
+    /** Set dynamic menu */
+    // this._pagesMenu.set(Menu.pages);
+
+    let sub = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        /** Expand menu base on active route */
+        this._pagesMenu().forEach((menu) => {
+          let activeGroup = false;
+          menu.items.forEach((subMenu) => {
+            const active = this.isActive(subMenu.route);
+            subMenu.expanded = active;
+            subMenu.active = active;
+            if (active) activeGroup = true;
+            if (subMenu.children) {
+              this.expand(subMenu.children);
+            }
+          });
+          menu.active = activeGroup;
+        });
+      }
+    });
+    this._subscription.add(sub);
   }
 
-  filterMenuByRole(menuItems: RouteInfo[], userRole: string): RouteInfo[] {
-    const roleSecurityMap: { [key: string]: number[] } = {
-      project_worker: [1],
-      project_owner: [2],
-      project_supervisor: [3, 4],
-      administrator: [4, 5],
-      app_admin: [4, 5],
-      project_architect: [6],
-      project_designer: [7],
-      project_engineer: [8],
-    };
+  get showSideBar() {
+    return this._showSidebar();
+  }
+  get showMobileMenu() {
+    return this._showMobileMenu();
+  }
+  get pagesMenu() {
+    return this._pagesMenu();
+  }
 
-    const allowedLevels = roleSecurityMap[userRole] || [];
-    return menuItems.filter(item => allowedLevels.includes(item.securitylvl));
+  set showSideBar(value: boolean) {
+    this._showSidebar.set(value);
+  }
+  set showMobileMenu(value: boolean) {
+    this._showMobileMenu.set(value);
+  }
+
+  public toggleSidebar() {
+    this._showSidebar.set(!this._showSidebar());
+  }
+
+  public toggleMenu(menu: any) {
+    this.showSideBar = true;
+    menu.expanded = !menu.expanded;
+  }
+
+  public toggleSubMenu(submenu: SubMenuItem) {
+    submenu.expanded = !submenu.expanded;
+  }
+
+  private expand(items: Array<any>) {
+    items.forEach((item) => {
+      item.expanded = this.isActive(item.route);
+      if (item.children) this.expand(item.children);
+    });
+  }
+
+  public isActive(instruction: any): boolean {
+    return this.router.isActive(this.router.createUrlTree([instruction]), {
+      paths: 'subset',
+      queryParams: 'subset',
+      fragment: 'ignored',
+      matrixParams: 'ignored',
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }

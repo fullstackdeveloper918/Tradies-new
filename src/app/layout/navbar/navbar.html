@@ -1,66 +1,40 @@
-<nav class="fixed top-0 w-full bg-gray-900 text-white flex items-center justify-between px-4 py-2 z-50">
-  <!-- Logo / Brand -->
-  <div class="flex items-center space-x-2 ml-3">
-    <img src="./assets/img/logo.png" alt="lightning logo" class="w-8 h-8">
-    <span class="text-lg font-semibold">Lightning</span>
+<div class="bg-background relative">
+  <div class="mx-auto px-5">
+    <div class="flex items-center justify-between py-3.5 md:justify-start">
+      <!-- Mobile Navigation Menu Button-->
+      <div class="sm:order-1 md:hidden">
+        <button
+          (click)="toggleMobileMenu()"
+          type="button"
+          class="bg-muted text-muted-foreground focus:ring-primary hover:bg-muted-foreground hover:text-muted inline-flex items-center justify-center rounded-md p-2 focus:outline-hidden focus:ring-2 focus:ring-inset"
+          aria-expanded="false">
+          <span class="sr-only">Open menu</span>
+          <!-- FontAwesome menu icon -->
+          <i class="fas fa-bars h-6 w-6"></i>
+        </button>
+      </div>
+
+      <!-- Logo -->
+      <div class="flex items-center justify-start gap-3 sm:order-2 ltr:md:mr-10 rtl:md:ml-10 lg:hidden">
+        <a class="bg-primary flex items-center justify-center rounded-sm p-2 focus:outline-hidden focus:ring-1">
+          <!-- FontAwesome tools icon as logo -->
+          <i class="fas fa-tools text-white"></i>
+        </a>
+        <b class="text-foreground hidden text-sm font-bold sm:block"> Angular Tailwind </b>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden space-x-10 sm:order-3 md:flex">
+        <!-- <app-navbar-menu></app-navbar-menu> -->
+      </div>
+
+      <!-- Profile menu -->
+      <div class="items-center justify-end sm:order-4 md:flex md:flex-1 lg:w-0">
+        <!-- <app-profile-menu></app-profile-menu> -->
+      </div>
+    </div>
   </div>
 
-  <!-- Sidebar toggler -->
-  <div class="ml-auto mr-3 hidden md:block">
-    <button class="text-white hover:text-gray-300" (click)="toggleSidebar()">
-      <i class="fa fa-bars"></i>
-    </button>
-  </div>
-
-  <!-- Mobile user avatar toggle -->
-  <div class="md:hidden mr-4 relative">
-    <button (click)="isCollapsed = !isCollapsed" aria-controls="collapseBasic" [attr.aria-expanded]="!isCollapsed">
-      <img src="./assets/img/user.jpg" class="w-8 h-8 rounded-full" alt="user">
-    </button>
-    <span class="absolute top-0 right-0 h-2 w-2 bg-red-600 rounded-full"></span>
-  </div>
-
-  <!-- Left search bar -->
-  <ul class="hidden md:flex flex-1 items-center space-x-4 mx-6">
-    <li>
-      <button class="text-white hover:text-gray-300" (click)="toggleSidebarPin()">
-        <i class="fa fa-bars"></i>
-      </button>
-    </li>
-    <li class="flex-grow">
-      <input type="text" placeholder="Search . . ." class="w-full px-3 py-1 text-black rounded-md focus:outline-none">
-    </li>
-  </ul>
-
-  <!-- Right nav menu -->
-  <div class="hidden md:flex items-center space-x-4">
-    <a class="relative flex items-center space-x-1 text-white hover:text-gray-300">
-      <i class="far fa-bell"></i>
-      <span>Alerts</span>
-      <span class="absolute top-0 right-0 h-2 w-2 bg-red-600 rounded-full"></span>
-    </a>
-    <a class="relative flex items-center space-x-1 text-white hover:text-gray-300">
-      <i class="far fa-envelope"></i>
-      <span>Messages</span>
-      <span class="absolute top-0 right-0 h-2 w-2 bg-green-600 rounded-full"></span>
-    </a>
-    <a class="flex items-center space-x-1 text-white hover:text-gray-300">
-      <i class="far fa-user"></i>
-      <span>Profile</span>
-    </a>
-    <a class="flex items-center space-x-1 text-white hover:text-gray-300">
-      <i class="fas fa-cog"></i>
-      <span>Setting</span>
-    </a>
-  </div>
-
-  <!-- Collapsible right menu on mobile -->
-  <div *ngIf="!isCollapsed" class="md:hidden w-full bg-gray-800 mt-2 px-4 py-3">
-    <ul class="space-y-2">
-      <li><a class="block text-white" href="#">Alerts</a></li>
-      <li><a class="block text-white" href="#">Messages</a></li>
-      <li><a class="block text-white" href="#">Profile</a></li>
-      <li><a class="block text-white" href="#">Setting</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- Mobile menu -->
+  <!-- <app-navbar-mobile></app-navbar-mobile> -->
+</div>

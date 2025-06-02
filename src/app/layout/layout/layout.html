@@ -1,16 +1,23 @@
-<div class="wrapper default-theme" [ngClass]="getClasses()">
-  <app-navbar></app-navbar>
-  
-  <main class="flex relative">
-    <app-sidebar></app-sidebar>
+<div class="flex h-screen w-full overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
 
-    <div class="pages flex-1 p-4">
-      <router-outlet></router-outlet>
-      <hr class="my-4 border-gray-300">
-      <app-footer></app-footer>
+  <div class="flex grow flex-col content-start overflow-hidden bg-card">
+    <!-- Header -->
+    <app-navbar></app-navbar>
+    <!-- main content -->
+    <div
+      id="main-content"
+      class="scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+      <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+        <router-outlet></router-outlet>
+      </div>
     </div>
 
-    <!-- Sidebar overlay for small screens -->
-    <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" (click)="toggleSidebar()"></div>
-  </main>
+    <!-- footer -->
+    <app-footer></app-footer>
+
+    <!-- Bottom bar -->
+    <!-- <app-bottom-navbar></app-bottom-navbar> -->
+  </div>
 </div>

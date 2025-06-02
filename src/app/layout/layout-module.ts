@@ -5,6 +5,7 @@ import { Footer } from './footer/footer';
 import { Navbar } from './navbar/navbar';
 import { Sidebar } from './sidebar/sidebar';
 import { SharedModule } from '../shared/shared-module';
+import { SidebarMenu } from './sidebar/sidebar-menu/sidebar-menu';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedModule } from '../shared/shared-module';
     Layout,     
     Footer,
     Navbar, 
-    Sidebar
+    Sidebar,
+    // SidebarMenu
   ],
   imports: [
     SharedModule,

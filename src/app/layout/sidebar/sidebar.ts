@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuService, RouteInfo } from '../../core/services/menu.service';
-import { AppService } from '../../core/services/app.service';
-
+import { MenuService } from '../../core/services/menu.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.html',
@@ -11,6 +8,13 @@ import { AppService } from '../../core/services/app.service';
 })
 export class Sidebar {
 
-  constructor(public appService: AppService) {}
+  public appJson: any
 
+  constructor(public menuService: MenuService) {}
+
+  ngOnInit(): void {}
+
+  public toggleSidebar() {
+    this.menuService.toggleSidebar();
+  }
 }

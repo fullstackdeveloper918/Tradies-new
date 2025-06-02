@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from '../../core/services/app.service';
+import { MenuService } from '../../core/services/menu.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +10,11 @@ import { AppService } from '../../core/services/app.service';
 })
 export class Navbar {
 
-  
-  constructor(private appService: AppService) { }
-  isCollapsed = true;
-  ngOnInit() {
-  }
+constructor(private menuService: MenuService) {}
 
-  toggleSidebarPin() {
-    this.appService.toggleSidebarPin();
-  }
-  toggleSidebar() {
-    this.appService.toggleSidebar();
+  ngOnInit(): void {}
+
+  public toggleMobileMenu(): void {
+    this.menuService.showMobileMenu = true;
   }
 }
