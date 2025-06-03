@@ -1,8 +1,9 @@
 import { NgFor, NgClass, NgTemplateOutlet, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { SubMenuItem } from '../../../core/models/menu.model';
-import { MenuService } from '../../../core/services/menu.service';
+import { SubMenuItem } from '../../../../core/models/menu.model';
+import { MenuService } from '../../../../core/services/menu.service';
+import { SidebarSubmenu } from '../sidebar-submenu/sidebar-submenu';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -16,6 +17,7 @@ import { MenuService } from '../../../core/services/menu.service';
     RouterLink,
     RouterLinkActive,
     NgIf,
+    SidebarSubmenu
   ],
 })
 export class SidebarMenu {

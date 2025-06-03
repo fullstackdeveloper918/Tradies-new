@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Sidebar } from './sidebar/sidebar';
+import { RouterOutlet } from '@angular/router';
+import { Footer } from './footer/footer';
 import { AppService } from '../../core/services/app.service';
+import {Navbar} from './navbar/navbar'
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
-  standalone : false
+  imports : [Sidebar, RouterOutlet,Footer, Navbar]
 })
 export class Layout {
 
    title = 'pro-dashboard-angular';
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService) {
+    console.log('htis is working')
+  }
   getClasses() {
     const classes = {
       'pinned-sidebar': this.appService.getSidebarStat().isSidebarPinned,

@@ -2,6 +2,8 @@ import { Injectable, OnDestroy, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MenuItem, SubMenuItem } from '../models/menu.model';
+import { Menu } from '../constants/menu';
+
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,7 @@ export class MenuService implements OnDestroy {
 
   constructor(private router: Router) {
     /** Set dynamic menu */
-    // this._pagesMenu.set(Menu.pages);
+    this._pagesMenu.set(Menu.pages);
 
     let sub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
