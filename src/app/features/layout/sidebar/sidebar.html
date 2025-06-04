@@ -1,5 +1,7 @@
 <nav
-  [ngClass]="menuService.showSideBar ? 'w-[210px] xl:w-[280px]' : 'w-[70px]'"
+  (mouseenter)="handleMouseEnter()"
+  (mouseleave)="handleMouseLeave()"
+  [ngClass]="(menuService.showSideBar || hoverSidebar) ? 'w-[210px] xl:w-[280px]' : 'w-[70px]'"
   class="hidden h-full flex-col justify-between pt-3 transition-all duration-300 lg:flex" style="background-color: #292929; color: white">
   <div class="overflow-hidden">
     <!-- Logo -->
@@ -28,6 +30,35 @@
         <i class="fas fa-angle-double-left"></i>
       </button>
     </div>
+
+    <div class="px-4 mb-4" *ngIf="menuService.showSideBar || hoverSidebar">
+  <div class="flex items-center gap-3 rounded-md p-2 hover:bg-zinc-800 transition-colors">
+    <div class="flex-shrink-0">
+      <div class="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
+        {{ userInitials }} <!-- e.g. "PS" -->
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm font-medium text-white leading-tight">{{ userFullName }}</span>
+      <div class="relative">
+        <button
+          (click)="toggleUserDropdown()"
+          class="flex items-center text-xs text-gray-300 hover:text-white transition">
+          Options
+          <svg class="ml-1 h-3 w-3 fill-current" viewBox="0 0 20 20">
+            <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" />
+          </svg>
+        </button>
+
+        <!-- Dropdown -->
+        <div *ngIf="showUserDropdown" class="absolute z-50 mt-1 w-32 rounded-md bg-zinc-800 shadow-lg py-1">
+          <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-zinc-700">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <!-- Menu Items -->
     <div

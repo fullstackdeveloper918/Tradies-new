@@ -12,6 +12,9 @@ import packageJson from '../../../../../package.json';
 export class Sidebar {
 
   public appJson: any = packageJson;
+  hoverSidebar = false;
+  userFullName = 'Pankaj Sharma';
+  showUserDropdown = false;
 
   constructor(public menuService: MenuService) {}
 
@@ -19,5 +22,26 @@ export class Sidebar {
 
   public toggleSidebar() {
     this.menuService.toggleSidebar();
+  }
+
+  handleMouseEnter(): void {
+  if (!this.menuService.showSideBar) {
+    this.hoverSidebar = true;
+  }
+}
+
+  get userInitials(): string {
+    const [first, last] = this.userFullName.split(' ');
+    return (first?.[0] ?? '') + (last?.[0] ?? '');
+  }
+
+  toggleUserDropdown() {
+    this.showUserDropdown = !this.showUserDropdown;
+  }
+
+  handleMouseLeave(): void {
+    if (!this.menuService.showSideBar) {
+      this.hoverSidebar = false;
+    }
   }
 }
