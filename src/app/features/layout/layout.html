@@ -1,23 +1,21 @@
-<div class="flex h-screen w-full overflow-hidden">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
 
-  <div class="flex grow flex-col content-start overflow-hidden bg-card">
-    <!-- Header -->
-    <app-navbar></app-navbar>
-    <!-- main content -->
-    <div
-      id="main-content"
-      class="scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
-      <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
-        <router-outlet></router-outlet>
-      </div>
+<div class="wrapper diary-app">
+    <div class="sidebar" data-image="./assets/img/sidebar-1.jpg">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background" style="background-image: url(assets/img/sidebar-1.jpg)"></div>
+
+        
     </div>
-
-    <!-- footer -->
-    <app-footer></app-footer>
-
-    <!-- Bottom bar -->
-    <!-- <app-bottom-navbar></app-bottom-navbar> -->
-  </div>
+    <div class="main-panel">
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+        <div *ngIf="!isMap()">
+            <app-footer></app-footer>
+        </div>
+        <span style="cursor:pointer;margin-left:10px;font-size:15px;" (dblclick)= "gotoChangelog()">version 3.6.0</span>
+        <button *ngIf="showtop == true" id="btn-top" (click)="scrollToTop()"><i class="material-icons">arrow_upward</i></button>
+        <button  *ngIf="showbottom == true" id="btn-top" (click)="scrollToBottom()"><i class="material-icons">arrow_downward</i></button>
+    </div>
+   
+    <!-- <app-fixedplugin></app-fixedplugin> -->
 </div>

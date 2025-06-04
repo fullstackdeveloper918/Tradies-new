@@ -22,12 +22,5 @@ import { SidebarSubmenu } from '../sidebar-submenu/sidebar-submenu';
 })
 export class SidebarMenu {
 
-  constructor(public menuService: MenuService) {}
-
-  public toggleMenu(subMenu: SubMenuItem) {
-    this.menuService.toggleMenu(subMenu);
-  }
-
-  ngOnInit(): void {}
 
 }

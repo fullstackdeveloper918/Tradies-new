@@ -11,21 +11,4 @@ import { SubMenuItem } from '../../../../core/models/menu.model';
   styleUrl: './sidebar-submenu.scss'
 })
 export class SidebarSubmenu {
-
- @Input() public submenu = <SubMenuItem>{};
-
-  constructor(public menuService: MenuService) {}
-
-  ngOnInit(): void {}
-
-  public toggleMenu(menu: any) {
-    this.menuService.toggleSubMenu(menu);
-  }
-
-  private collapse(items: Array<any>) {
-    items.forEach((item) => {
-      item.expanded = false;
-      if (item.children) this.collapse(item.children);
-    });
-  }
 }

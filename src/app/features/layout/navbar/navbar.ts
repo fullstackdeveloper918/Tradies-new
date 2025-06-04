@@ -11,9 +11,4 @@ export class Navbar {
 
 constructor(private menuService: MenuService) {}
 
-  ngOnInit(): void {}
-
-  public toggleMobileMenu(): void {
-    this.menuService.showMobileMenu = true;
-  }
 }
