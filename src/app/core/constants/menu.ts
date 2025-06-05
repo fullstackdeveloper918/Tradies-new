@@ -29,12 +29,12 @@ export class Menu {
             { label: 'Weekly reports', route: '/errors/500' },
           ],
         },
-        {
-          icon: 'fas fa-cube',
-          label: 'Components',
-          route: '/components',
-          children: [{ label: 'Table', route: '/components/table' }],
-        },
+        // {
+        //   icon: 'fas fa-cube',
+        //   label: 'Components',
+        //   route: '/components',
+        //   children: [{ label: 'Table', route: '/components/table' }],
+        // },
       ],
     },
  
