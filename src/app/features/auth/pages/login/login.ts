@@ -4,6 +4,7 @@ import { Auth } from '../../../../core/services/auth';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { LocalStorage } from '../../../../core/services/local-storage/local-storage';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class Login implements OnInit, OnDestroy{
   private fb: FormBuilder,
   private authService : Auth,
   private toastr : ToastrService,
-  private router : Router) {
+  private router : Router,
+  private localStorageService : LocalStorage) {
   }
 
   ngOnInit(){
@@ -46,9 +48,12 @@ export class Login implements OnInit, OnDestroy{
   onLoginSubmit() {
     if (this.loginForm.valid) {
       console.log('Login:', this.loginForm.value);
-    this.$subscription =   this.authService.login(this.loginForm.value).subscribe((res)=>{
+          this.$subscription =   this.authService.login(this.loginForm.value).subscribe((res)=>{
           if (res.status === 200 && res.success) {
-          this.router.navigate(['/dashboard'])
+          console.log('res', res)
+          this.localStorageService.setItem('token', res.data.token)
+          this.localStorageService.setItem('userDetails',res.data)
+          this.router.navigate(['/home/dashboard'])
           this.toastr.success(res.message || 'Login successful');
         }
       })

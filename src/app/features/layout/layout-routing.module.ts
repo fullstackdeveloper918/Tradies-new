@@ -8,8 +8,13 @@ const routes: Routes = [
     component: Layout,
     loadChildren: () => import('../dashboard/dashboard-module').then((m) => m.DashboardModule),
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'error/404' },
+    { 
+      path : 'settings',
+      component : Layout,
+      loadChildren : () => import('../settings/settings-module').then((m) => m.SettingsModule)
+    },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '**', redirectTo: 'error/404' },
 ];
 
 @NgModule({

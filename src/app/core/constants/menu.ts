@@ -9,7 +9,7 @@ export class Menu {
         {
           icon: 'fas fa-chart-pie',
           label: 'Dashboard',
-          route: '/dashboard'
+          route: '/home/dashboard'
         },
         {
           icon: 'fas fa-lock',
@@ -29,12 +29,14 @@ export class Menu {
             { label: 'Weekly reports', route: '/errors/500' },
           ],
         },
-        // {
-        //   icon: 'fas fa-cube',
-        //   label: 'Components',
-        //   route: '/components',
-        //   children: [{ label: 'Table', route: '/components/table' }],
-        // },
+        {
+          icon: 'fas fa-folder',
+          label: 'Settings',
+          route: '/home/settings',
+          children: [
+            { label: 'Organisations', route: '/home/settings/organisations' },
+          ],
+        },
       ],
     },
  

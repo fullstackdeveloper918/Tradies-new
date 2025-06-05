@@ -4,6 +4,9 @@ import { App } from './app/app';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './app/core/interceptors/auth-interceptor';
+import { errorInterceptor } from './app/core/interceptors/error-interceptor';
 
 bootstrapApplication(App, {
   ...appConfig,
@@ -11,6 +14,9 @@ bootstrapApplication(App, {
     ...(appConfig.providers || []),
     provideAnimations(),
     provideToastr(),
+    provideHttpClient(
+    withInterceptors([authInterceptor, errorInterceptor])
+  )
   ]
 })
   .catch((err) => console.error(err));
