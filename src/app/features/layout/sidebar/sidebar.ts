@@ -3,6 +3,8 @@ import { MenuService } from '../../../core/services/menu.service';
 import { NgClass, NgIf } from '@angular/common';
 import { SidebarMenu } from './sidebar-menu/sidebar-menu';
 import packageJson from '../../../../../package.json';
+import { Auth } from '../../../core/services/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.html',
@@ -16,7 +18,7 @@ export class Sidebar {
   userFullName = 'Pankaj Sharma';
   showUserDropdown = false;
 
-  constructor(public menuService: MenuService) {}
+  constructor(public menuService: MenuService, private authService : Auth, private router : Router) {}
 
   ngOnInit(): void {}
 
@@ -43,5 +45,10 @@ export class Sidebar {
     if (!this.menuService.showSideBar) {
       this.hoverSidebar = false;
     }
+  }
+
+  logOut(){
+   this.authService.logOut()
+   this.router.navigate(['auth'])
   }
 }

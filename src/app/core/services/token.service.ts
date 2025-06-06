@@ -3,8 +3,8 @@ import {LocalStorage} from '../services/local-storage/local-storage'
 
 @Injectable({ providedIn: 'root' })
 export class TokenService { 
-  storageService = Inject(LocalStorage)
+  constructor(private storageService : LocalStorage){}
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.storageService.getItem('token');
   }
 }

@@ -1,1 +1,22 @@
-  <table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+<div class="bg-white shadow rounded p-4">
+  <div class="flex items-center justify-between border-b pb-3 mb-4">
+    <h1 class="text-xl font-semibold text-gray-800">Organisations</h1>
+    <button (click)="onAddOrganisation()" class="dcb-btn">
+      <i class="fas fa-plus mr-2"></i> Add Organisation
+    </button>
+  </div>
+
+  <div>
+    <table datatable [dtOptions]="dtOptions" class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 border-b">Name</th>
+          <th class="px-4 py-2 border-b">Created On</th>
+          <th class="px-4 py-2 border-b">Updated On</th>
+          <th class="px-4 py-2 border-b">Status</th>
+          <th class="px-4 py-2 border-b">Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>

@@ -7,28 +7,25 @@ export class LocalStorage {
 
   constructor() { }
 
-   setItem<T>(key: string, value: T): void {
-    try {
-    if (typeof value === 'string') {
-          localStorage.setItem(key, value); // store raw string
-        } else {
-          localStorage.setItem(key, JSON.stringify(value)); // store objects
-        }
-      } catch (error) {
-      console.error('Error saving to localStorage', error);
-    }
+  setItem<T>(key: string, value: T): void {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error('Error saving to localStorage', error);
   }
+}
+
 
   // Get item
-  getItem<T>(key: string): T | null {
-    try {
-      const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) as T : null;
-    } catch (error) {
-      console.error('Error reading from localStorage', error);
-      return null;
-    }
+ getItem<T>(key: string): T | null {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) as T : null;
+  } catch (error) {
+    console.error('Error reading from localStorage', error);
+    return null;
   }
+}
 
   // Remove item
   removeItem(key: string): void {

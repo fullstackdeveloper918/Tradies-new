@@ -20,14 +20,16 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   getData(){
-   this.$subscription = this._dashboardService.getData().subscribe((res)=>{
-    if(res){
-     this.toastr.success('fetchect data successfully')
-    }
-   })
+  //  this.$subscription = this._dashboardService.getData().subscribe((res)=>{
+  //   if(res){
+  //    this.toastr.success('fetchect data successfully')
+  //   }
+  //  })
   }
 
   ngOnDestroy(){
+  if(this.$subscription){
   this.$subscription.unsubscribe();
+  }
   }
 }

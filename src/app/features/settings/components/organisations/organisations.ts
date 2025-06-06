@@ -18,40 +18,61 @@ export class Organisations implements OnInit, OnDestroy {
   constructor(private settingsService: Settings) {}
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      serverSide: true,
-      processing: true,
-      ajax: (dataTablesParameters: any, callback) => {
-          console.log('DataTables AJAX triggered', dataTablesParameters);
-        const page = Math.floor(dataTablesParameters.start / dataTablesParameters.length) + 1;
-        const pageSize = dataTablesParameters.length;
+   this.initializeDatatable();
+  }
 
-        this.settingsService.getOrganisations().subscribe(
-          (res: unknown) => {
-            console.log('res',res)
-            const response = res as OrganisationsResponse;
-            if (isValidApiResponse<Organisation[]>(response)) {
-              this.organisations = response.data;
-              callback({
-                recordsTotal: response.pagination.totalCount,
-                recordsFiltered: response.pagination.totalCount,
-                data: []
-              });
-            }
-          },
-          (err) => {
-            console.error('Error loading data:', err);
+  initializeDatatable() {
+  this.dtOptions = {
+    pagingType: 'full_numbers',
+    serverSide: true,
+    processing: true,
+    ajax: (dataTablesParameters: any, callback) => {
+      const page = Math.floor(dataTablesParameters.start / dataTablesParameters.length) + 1;
+      const pageSize = dataTablesParameters.length;
+      console.log('pagesize', pageSize)
+
+      this.settingsService.getOrganisations(page, pageSize).subscribe(
+        (res: unknown) => {
+          console.log('res', res);
+          const response = res as OrganisationsResponse;
+          if (isValidApiResponse<Organisation[]>(response)) {
+            this.organisations = response.data;
+            callback({
+              recordsTotal: response.pagination.totalCount || 10,
+              recordsFiltered: response.pagination.totalCount || 10,
+              data: response.data
+            });
           }
-        );
-      },
-      columns: [
-        { data: 'name' },
-        { data: 'owner.firstName' },
-        { data: 'owner.email' },
-        { data: 'status' }
-      ]
-    };
+        },
+        (err) => {
+          console.error('Error loading data:', err);
+        }
+      );
+    },
+    columns: [
+      { data: 'name' },
+      { data: 'createdOn' },
+      { data: 'updatedOn' },
+      { data: 'status' },
+      {
+        data: null,
+        orderable: false,
+        searchable: false,
+        render: (data: any) => {
+          return `
+            <button class="btn btn-sm btn-info me-1 view-btn" title="View"><i class="fas fa-eye"></i></button>
+            <button class="btn btn-sm btn-primary me-1 edit-btn" title="Edit"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-sm btn-danger delete-btn" title="Delete"><i class="fas fa-trash-alt"></i></button>
+          `;
+        }
+      }
+    ]
+  };
+}
+
+  onAddOrganisation(): void {
+    // Navigate to form or open modal
+    // this.router.navigate(['/settings/organisation/create']);
   }
 
   ngOnDestroy(): void {
