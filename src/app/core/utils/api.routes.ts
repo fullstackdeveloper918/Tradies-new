@@ -1,3 +1,4 @@
 export const apiRoutes = {
-    organisations : 'organisations'
+    organisations : 'organisations',
+    createUser : 'auth/create-user'
 }

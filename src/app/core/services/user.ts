@@ -6,7 +6,7 @@ import { LocalStorage } from './local-storage/local-storage';
 })
 export class User {
   private readonly TOKEN_KEY = 'token';
-  private readonly USER_KEY = 'user';
+  private readonly USER_KEY = 'userDetails';
 
   constructor(private localStorgeService: LocalStorage) {}
 
@@ -25,6 +25,6 @@ export class User {
 
   getOrganisationUuid(){
     const userDetails = this.localStorgeService.getItem<any>(this.USER_KEY)
-    return userDetails.organisations.uuid;
+    return userDetails.user.organisation.uuid;
   }
 }

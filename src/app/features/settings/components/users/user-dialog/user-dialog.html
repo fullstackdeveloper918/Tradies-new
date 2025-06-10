@@ -1,0 +1,58 @@
+<h2 mat-dialog-title class="text-lg font-semibold text-gray-700">
+  {{ DD ? "Update User" : "Add User" }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" mat-dialog-content class="space-y-4 pt-2">
+  <!-- First Name -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" placeholder="Enter first name" />
+  </mat-form-field>
+
+  <!-- Last Name -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" placeholder="Enter last name" />
+  </mat-form-field>
+
+  <!-- Email -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="Enter email address" type="email" />
+  </mat-form-field>
+
+  <!-- Password -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" placeholder="Enter password" type="password" />
+  </mat-form-field>
+
+  <!-- Mobile Number -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Mobile Number</mat-label>
+    <input matInput formControlName="mobileNumber" placeholder="Enter mobile number" type="tel" />
+  </mat-form-field>
+
+  <!-- User Role -->
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>User Role</mat-label>
+    <mat-select formControlName="userRole">
+      <mat-option [value]="1">Admin</mat-option>
+      <mat-option [value]="2">Project Owner</mat-option>
+      <mat-option [value]="3">Viewer</mat-option>
+      <!-- Add more roles as needed -->
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<mat-dialog-actions align="end" class="pt-4">
+  <button mat-button (click)="onCancel()" class="mr-2">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="onSubmit()"
+  >
+    {{ DD ? "Update" : "Create" }}
+  </button>
+</mat-dialog-actions>

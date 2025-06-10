@@ -3,6 +3,9 @@ import { ApiService } from './api/api.service';
 import { buildPaginationParams } from '../utils/http-params.helper';
 import { Organisation, organisations } from '../interfaces/settings.interface';
 import { apiRoutes } from '../utils/api.routes';
+import { User } from './user';
+import { CreateUserResponse } from '../interfaces/createUser.interfacet';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +32,15 @@ deleteOrganisation(data:Organisation){
 // UPDATE ORGANISATION
 updateOrganisations(formValue: organisations, data : Organisation){
   return this.apiService.put(`${apiRoutes.organisations}/${data.uuid}`, formValue)
+}
+
+// GET ORGANISATION USERS
+getOrganisationsUsers(organisationUuid:string){
+ return this.apiService.get(`${apiRoutes.organisations}/${organisationUuid}/users`)
+}
+
+// CREATE USER
+createUser(userForm:User): Observable<CreateUserResponse>{
+  return this.apiService.post<CreateUserResponse>(apiRoutes.createUser, userForm)
 }
 }

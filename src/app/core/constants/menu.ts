@@ -35,6 +35,8 @@ export class Menu {
           route: '/home/settings',
           children: [
             { label: 'Organisations', route: '/home/settings/organisations' },
+            { label: 'users', route: '/home/settings/users' },
+
           ],
         },
       ],
