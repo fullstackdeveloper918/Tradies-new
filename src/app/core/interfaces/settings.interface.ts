@@ -12,8 +12,8 @@ export interface Organisation {
   name: string;
   userId: number;
   status: number;
-  createdOn: string; // ISO date string
-  updatedOn: string; // ISO date string
+  createdOn: string; 
+  updatedOn: string; 
   deleteFlag: boolean;
   owner: Owner;
 }

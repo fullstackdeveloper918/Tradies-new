@@ -5,13 +5,26 @@ export interface User {
   lastName: string;
   mobileNumber: string;
   userRole: number;
-  organisation: any | null; // Replace `any` with a specific type if known
+  organisation: any | null; 
   status: number;
-  createdOn: string; // ISO date string
-  updatedOn: string; // ISO date string
+  createdOn: string;
+  updatedOn: string; 
 }
 
 export interface CreateUserResponse {
+  data: User;
+  message: string;
+  status: number;
+  success: boolean;
+}
+
+
+export interface Organisation {
+  name: string;
+  uuid: string;
+}
+
+export interface UserUpdateResponse {
   data: User;
   message: string;
   status: number;

@@ -3,16 +3,17 @@ import { ApiService } from './api/api.service';
 import { buildPaginationParams } from '../utils/http-params.helper';
 import { Organisation, organisations } from '../interfaces/settings.interface';
 import { apiRoutes } from '../utils/api.routes';
-import { User } from './user';
-import { CreateUserResponse } from '../interfaces/createUser.interfacet';
+import { userService } from './user';
+import { CreateUserResponse, UserUpdateResponse } from '../interfaces/createUser.interfacet';
 import { Observable } from 'rxjs';
+import { UserForm } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Settings {
 
-  constructor(private apiService : ApiService) { }
+  constructor(private apiService : ApiService, private userService : userService) { }
 
 getOrganisations(page?: number, pageSize?: number) {
 const params = buildPaginationParams(page, pageSize);
@@ -40,7 +41,25 @@ getOrganisationsUsers(organisationUuid:string){
 }
 
 // CREATE USER
-createUser(userForm:User): Observable<CreateUserResponse>{
-  return this.apiService.post<CreateUserResponse>(apiRoutes.createUser, userForm)
+createUser(userForm: UserForm): Observable<CreateUserResponse> {
+  const organisationUUId = this.userService.getOrganisationUuid();
+
+  // Create a new object with organisationId set properly
+  const payload: UserForm = {
+    ...userForm,
+    organisationId: organisationUUId
+  };
+
+  return this.apiService.post<CreateUserResponse>(apiRoutes.createUser, payload);
+}
+
+// Update USER
+updateUser(userForm:UserForm, userUUid: string): Observable<UserUpdateResponse>{
+  return this.apiService.put<UserUpdateResponse>(`${apiRoutes.user}/${userUUid}`, userForm)
+}
+
+// DELETE USER
+deleteUser(userUUid:string){
+  return this.apiService.delete(`${apiRoutes.user}/${userUUid}`)
 }
 }

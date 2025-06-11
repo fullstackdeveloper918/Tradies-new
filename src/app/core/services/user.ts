@@ -4,7 +4,7 @@ import { LocalStorage } from './local-storage/local-storage';
 @Injectable({
   providedIn: 'root'
 })
-export class User {
+export class userService {
   private readonly TOKEN_KEY = 'token';
   private readonly USER_KEY = 'userDetails';
 

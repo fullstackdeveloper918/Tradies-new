@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Settings } from '../../../../core/services/settings';
-import { User } from '../../../../core/services/user';
+import { userService } from '../../../../core/services/user';
 import { SharedModule } from '../../../../shared/shared-module';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialog } from './user-dialog/user-dialog';
 import { isValidApiResponse } from '../../../../core/utils/apiUtils';
-import { CreateUserResponse } from '../../../../core/interfaces/createUser.interfacet';
+import { CreateUserResponse, User } from '../../../../core/interfaces/createUser.interfacet';
+import { Alert } from '../../../../shared/components/alert/alert';
 
 @Component({
   selector: 'app-users',
@@ -20,7 +21,7 @@ export class Users implements OnInit, OnDestroy {
   $subscription!: Subscription
   constructor(
   private settingsService : Settings, 
-  private userService : User,
+  private userService : userService,
   private dialog : MatDialog){}
 
   ngOnInit(){
@@ -43,14 +44,39 @@ export class Users implements OnInit, OnDestroy {
   }
 
   // CREATE USER
-  openDialog(){
+  openDialog(userData?:User){
+  console.log('userdaa', userData);
   const dialogRef =  this.dialog.open(UserDialog, {
-    width : '600px'
+    width : '600px',
+    data : userData
   })
   dialogRef.afterClosed().subscribe((res:CreateUserResponse)=>{
+    console.log('res',res)
     if(isValidApiResponse(res)){  
+    console.log('res',res)
     this.getUsers();
     }
   })
+  }
+
+  // OPEN ALERT DIALOG
+  openAlertDialog(userData : User){
+     this.dialog.open(Alert, {
+      data: {
+        title: 'Delete User',
+        message: 'Are you sure you want to delete this User?'
+      }
+    }).afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.deleteUser(userData);
+      }
+    });
+  }
+
+  // DELETE USER
+  deleteUser(userData: User){
+    this.settingsService.deleteUser(userData.uuid).subscribe((res:any)=>{
+      console.log('user deleted', res)
+    })
   }
 }

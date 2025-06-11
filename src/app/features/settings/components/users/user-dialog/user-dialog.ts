@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../../../shared/shared-module';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Settings } from '../../../../../core/services/settings';
-import { CreateUserResponse } from '../../../../../core/interfaces/createUser.interfacet';
+import { CreateUserResponse, User, UserUpdateResponse } from '../../../../../core/interfaces/createUser.interfacet';
 import { isValidApiResponse } from '../../../../../core/utils/apiUtils';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-dialog',
@@ -16,15 +17,20 @@ export class UserDialog implements OnInit{
   form! : FormGroup
   constructor(
   private fb: FormBuilder,
-  private dialogRef : DialogRef<CreateUserResponse | void>,
-  private settingsService : Settings
+  private dialogRef : MatDialogRef<UserDialog>,
+  private settingsService : Settings,
+  @Inject(MAT_DIALOG_DATA ) public data : User
   ){}
+
   ngOnInit(): void {
     this.initForm();
+    if(this.DD){
+      this.patchFormValue();
+    }
   }
 
   get DD() {
-    return 0
+    return this.data
   }
 
   initForm(){
@@ -38,15 +44,37 @@ export class UserDialog implements OnInit{
   });
   }
 
+  patchFormValue(){
+    this.form.patchValue(this.data)
+  }
+
   onSubmit(){
     console.log('form', this.form)
     if(this.form.valid){
-      this.settingsService.createUser(this.form.value).subscribe((res:CreateUserResponse)=>{
-        if(isValidApiResponse(res)){
-        this.dialogRef.close(res);
-        }
-      })
+    if(this.DD){
+    this.updateUser();
+    } else{
+      this.createUser();
     }
+    }
+  }
+
+  // CREATE USER
+  createUser(){
+    this.settingsService.createUser(this.form.value).subscribe((res:CreateUserResponse)=>{
+      if(isValidApiResponse(res)){
+      this.dialogRef.close(res);
+      }
+    })
+  }
+
+  // UPDATE USER
+  updateUser(){
+   this.settingsService.updateUser(this.form.value, this.data.uuid).subscribe((res:UserUpdateResponse)=>{
+    if(isValidApiResponse(res)){
+     this.dialogRef.close(res)
+    }
+   })
   }
 
   onCancel(){
