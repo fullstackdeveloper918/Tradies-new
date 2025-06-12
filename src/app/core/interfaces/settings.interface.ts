@@ -40,3 +40,47 @@ export interface organisations {
   name: string;
   status: number; 
 }
+
+export interface AdminSettingsForm {
+  hoverColour: string;
+  highlightColour: string;
+  enabledButtonColour: string;
+  hoveredButtonColour: string;
+  phoneNumber: string;
+  mobileNumber: string;
+  emailAddress: string;
+  pdfCompanyName: string;
+  address: string;
+  adminNotificationEmail: string;
+  textSignature: string;
+  emailSignature: string;
+  logoUrl: string;
+}
+
+export interface AdminSettings {
+  hoverColour: string;
+  highlightColour: string;
+  enabledButtonColour: string;
+  hoveredButtonColour: string;
+  phoneNumber: string;
+  mobileNumber: string;
+  emailAddress: string;
+  pdfCompanyName: string;
+  address: string;
+  adminNotificationEmail: string;
+  textSignature: string;
+  emailSignature: string;
+  logoUrl: string;
+  createdOn: string; // ISO date string
+  updatedOn: string; // ISO date string
+  deleteFlag: boolean;
+  organisation: {
+    uuid: string;
+  };
+}
+
+export interface AdminSettingsRespose{
+  status: number;
+  success: boolean;
+  data: AdminSettings;
+}

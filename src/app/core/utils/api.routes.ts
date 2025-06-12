@@ -1,5 +1,6 @@
 export const apiRoutes = {
     organisations : 'organisations',
     createUser : 'auth/create-user',
-    user : 'users'
+    user : 'users',
+    adminSettings : 'settings/admin'
 }

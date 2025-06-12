@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api/api.service';
 import { buildPaginationParams } from '../utils/http-params.helper';
-import { Organisation, organisations } from '../interfaces/settings.interface';
+import { AdminSettingsForm, AdminSettingsRespose, Organisation, organisations } from '../interfaces/settings.interface';
 import { apiRoutes } from '../utils/api.routes';
 import { userService } from './user';
 import { CreateUserResponse, UserUpdateResponse } from '../interfaces/createUser.interfacet';
@@ -61,5 +61,15 @@ updateUser(userForm:UserForm, userUUid: string): Observable<UserUpdateResponse>{
 // DELETE USER
 deleteUser(userUUid:string){
   return this.apiService.delete(`${apiRoutes.user}/${userUUid}`)
+}
+
+// UPDATE ADMIN SETTINGS
+updateAdminSettings(adminSettingsForm:AdminSettingsForm){
+  return this.apiService.post(apiRoutes.adminSettings, adminSettingsForm)
+}
+
+// GET ADMIN SETTINGS
+getAdminSettings(): Observable<AdminSettingsRespose>{
+  return this.apiService.get<AdminSettingsRespose>(apiRoutes.adminSettings);
 }
 }

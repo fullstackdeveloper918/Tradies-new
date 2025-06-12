@@ -25,6 +25,8 @@
     "datatables.net": "^2.3.1",
     "datatables.net-dt": "^2.3.1",
     "jquery": "^3.7.1",
+    "ngx-color": "^10.0.0",
+    "ngx-quill": "^28.0.1",
     "ngx-toastr": "^19.0.0",
     "postcss": "^8.5.4",
     "rxjs": "~7.8.0",
