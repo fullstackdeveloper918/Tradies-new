@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SharedModule } from '../../../../shared/shared-module';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { QuillModule } from 'ngx-quill';
 import { Settings } from '../../../../core/services/settings';
 import { Subscription } from 'rxjs';
 import { isValidApiResponse } from '../../../../core/utils/apiUtils';
@@ -11,7 +10,7 @@ import { AdminSettingsRespose } from '../../../../core/interfaces/settings.inter
 
 @Component({
   selector: 'app-admin-settings',
-  imports: [SharedModule, QuillModule],
+  imports: [SharedModule],
   templateUrl: './admin-settings.html',
   styleUrl: './admin-settings.scss'
 })

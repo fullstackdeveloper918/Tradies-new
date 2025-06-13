@@ -1,0 +1,74 @@
+<div class="main-content dashboard-content">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white shadow rounded-2xl p-6">
+        <div class="mb-4 pb-2 font-semibold">
+          {{ sectionTitle || 'Settings' }}
+        </div>
+
+        <form [formGroup]="editForm" class="space-y-6">
+          <ng-container *ngFor="let field of config">
+
+            <!-- TEXT / EMAIL FIELD -->
+            <div *ngIf="field.type === 'text' || field.type === 'email'">
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ field.label }}
+              </label>
+              <input [formControlName]="field.controlName"
+                     [type]="field.type"
+                     [placeholder]="field.placeholder || ''"
+                     matInput
+                     class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg" />
+              <!-- Validation error -->
+              <div *ngIf="editForm.get(field.controlName)?.touched && editForm.get(field.controlName)?.invalid"
+                   class="mt-1 text-sm text-red-600">
+                <div *ngIf="editForm.get(field.controlName)?.errors?.['required']">
+                  {{ field.label }} is required.
+                </div>
+                <div *ngIf="editForm.get(field.controlName)?.errors?.['email']">
+                  Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+
+            <!-- QUILL EDITOR FIELD -->
+            <div *ngIf="field.type === 'quill'">
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ field.label }}
+              </label>
+              <quill-editor [formControlName]="field.controlName"></quill-editor>
+            </div>
+
+            <!-- CHECKBOX FIELD -->
+            <div *ngIf="field.type === 'checkbox'">
+              <label class="block text-sm font-bold text-gray-700">
+                {{ field.label }}
+              </label>
+              <p *ngIf="field.hint" class="text-sm italic text-gray-500 mb-2">{{ field.hint }}</p>
+              <label class="inline-flex items-center space-x-2">
+                <input type="checkbox"
+                       [formControlName]="field.controlName"
+                       class="form-checkbox" />
+                <span class="text-sm"
+                      [style.backgroundColor]="field.highlight ? highlightColor : ''">
+                  {{ field.checkboxLabel || field.label }}
+                </span>
+              </label>
+            </div>
+
+          </ng-container>
+        </form>
+
+        <!-- Submit Button -->
+        <div class="mt-6">
+          <button (click)="save()"
+                  mat-button-raised
+                  class="hover:bg-white text-teal-800 rounded-full py-2 px-2 shadow-md hover:shadow-2xl transition duration-500" style="background-color: #070707; color: white;"
+                  appAdminButtonStyleDirective>
+            Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

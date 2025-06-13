@@ -14,7 +14,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401) {
         console.error('Unauthorized - Redirecting to login');
         toastr.warning('You are not authorized. Redirecting to login.', 'Unauthorized');
-        router.navigate(['/auth/sign-in']);
+        router.navigate(['/auth/login']);
       } else if (error.status === 403) {
         console.error('Forbidden - Access denied');
         toastr.error('You do not have permission to perform this action.', 'Forbidden');

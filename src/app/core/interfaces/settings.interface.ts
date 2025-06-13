@@ -84,3 +84,23 @@ export interface AdminSettingsRespose{
   success: boolean;
   data: AdminSettings;
 }
+
+export interface VariationSettingsForm {
+  adminEmails: string;
+  defaultOpeningMessage: string;
+  defaultClosingMessage: string;
+  addJobNumber: boolean;
+  codePrefix: string;
+}
+
+export interface SettingField {
+  controlName: string;
+  label: string;
+  type: 'text' | 'email' | 'quill' | 'checkbox';
+  placeholder?: string;
+  validators?: any[];
+  checkboxLabel?: string;
+  hint?: string; // ✅ Add this line
+  highlight?: boolean;
+}
+

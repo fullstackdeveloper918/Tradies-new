@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { Organisations } from './components/organisations/organisations';
 import { Users } from './components/users/users';
 import { AdminSettings } from './components/admin-settings/admin-settings';
+import { VariationSettings } from './components/variation-settings/variation-settings';
+import { SelectionsSettings } from './components/selections-settings/selections-settings';
+import { rfiSettings } from './components/rfi-settings/rfi-setttings';
 
 const routes: Routes = [
     {
@@ -21,6 +24,18 @@ const routes: Routes = [
   {
     path : 'admin-settings',
     component : AdminSettings
+  },
+  {
+    path : 'variation-settings',
+    component : VariationSettings
+  },
+  {
+    path : 'selection-settings',
+    component : SelectionsSettings
+  },
+  {
+    path : 'rfi-settings',
+    component : rfiSettings
   }
 ];
 

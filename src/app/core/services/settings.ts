@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api/api.service';
 import { buildPaginationParams } from '../utils/http-params.helper';
-import { AdminSettingsForm, AdminSettingsRespose, Organisation, organisations } from '../interfaces/settings.interface';
+import { AdminSettingsForm, AdminSettingsRespose, Organisation, organisations, VariationSettingsForm } from '../interfaces/settings.interface';
 import { apiRoutes } from '../utils/api.routes';
 import { userService } from './user';
 import { CreateUserResponse, UserUpdateResponse } from '../interfaces/createUser.interfacet';
@@ -71,5 +71,39 @@ updateAdminSettings(adminSettingsForm:AdminSettingsForm){
 // GET ADMIN SETTINGS
 getAdminSettings(): Observable<AdminSettingsRespose>{
   return this.apiService.get<AdminSettingsRespose>(apiRoutes.adminSettings);
+}
+
+// UPDATE VARIATION SETTINGS
+updateSettings(settingstype: string, variationForm: VariationSettingsForm) {
+  console.log('settingstype', settingstype);
+
+  const settingsModuleMap: { [key: string]: number } = {
+    variation: 1,
+    selection: 2,
+    rfi: 3
+  };
+
+  const module = settingsModuleMap[settingstype];
+
+  if (!module) {
+    throw new Error(`Unknown settings type: ${settingstype}`);
+  }
+  return this.apiService.post(`${apiRoutes.settings}/${module}`, variationForm);
+}
+
+// GET VARIATIONS, SELECTIONS AND RFI SETTINGS
+getVSRSettings(settingstype : string){
+  const settingsModuleMap: { [key: string]: number } = {
+    variation: 1,
+    selection: 2,
+    rfi: 3
+  };
+
+  const module = settingsModuleMap[settingstype];
+
+  if (!module) {
+    throw new Error(`Unknown settings type: ${settingstype}`);
+  }
+  return this.apiService.get(`${apiRoutes.settings}/${module}`);
 }
 }

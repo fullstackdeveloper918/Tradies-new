@@ -9,13 +9,20 @@
     <!-- List items -->
     <li *ngFor="let item of menu.items">
       <!-- Menu List -->
-      <div
+             <!-- <div
         (click)="toggleMenu(item)"
         [ngClass]="{
           'hover:bg-primary/10': !menuService.showSideBar && item.active,
           'hover:bg-card/50': !menuService.showSideBar
         }"
-        class="text-muted-foreground hover:text-foreground group relative flex grow items-center gap-4 rounded-lg px-2">
+        class="text-muted-foreground hover:text-foreground group relative flex grow items-center gap-4 rounded-lg px-2"> -->
+    <div
+  (click)="toggleMenu(item)"
+  [ngClass]="{
+    'bg-white text-black': item.active,
+    'hover:bg-white hover:text-black': !item.active
+  }"
+  class="group relative flex grow items-center gap-4 rounded-lg px-2 transition-colors duration-150">
         
         <!-- Icon -->
         <div [ngClass]="item.active && !menuService.showSideBar ? 'text-primary' : 'text-muted-foreground/50'">

@@ -10,11 +10,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {MatChipsModule} from '@angular/material/chips';
 import { ColorSketchModule } from 'ngx-color/sketch';
+import { QuillModule } from 'ngx-quill';
+import { AdminButtonStyleDirective } from './directives/admin-button-style-directive';
+import { SettingsForm } from './components/settings-form/settings-form';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [AdminButtonStyleDirective,SettingsForm],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,7 +29,9 @@ import { ColorSketchModule } from 'ngx-color/sketch';
     MatSelectModule,
     MatButtonModule,
     MatChipsModule,
-    ColorSketchModule
+    ColorSketchModule,
+    QuillModule,
+    MatChipsModule
   ],
    exports: [
     CommonModule,
@@ -39,7 +44,11 @@ import { ColorSketchModule } from 'ngx-color/sketch';
     MatSelectModule,
     MatButtonModule,
     MatChipsModule,
-    ColorSketchModule
+    ColorSketchModule,
+    QuillModule,
+    MatChipsModule,
+    AdminButtonStyleDirective,
+    SettingsForm
   ]
 })
 export class SharedModule { }

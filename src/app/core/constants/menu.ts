@@ -14,8 +14,8 @@ export class Menu {
         {
           icon: 'fas fa-lock',
           label: 'View reports',
-          route: '/',
-          children: [
+          route: '/reports',
+          children: [ 
             { label: 'Daily reports', route: '/auth/sign-up' },
             { label: 'Weekly reports', route: '/auth/sign-in' }
           ],
@@ -32,9 +32,12 @@ export class Menu {
         {
           icon: 'fas fa-folder',
           label: 'Settings',
-          route: '/home/settings',
+          route: 'home/settings',
           children: [
-            { label : 'admin-settings', route : '/home/settings/admin-settings'},
+            { label : 'Admin-settings', route : '/home/settings/admin-settings'},
+            { label : 'Variation Settings', route : '/home/settings/variation-settings'},
+            { label : 'Selection Settings', route : '/home/settings/selection-settings'},
+            { label : 'Rfi Settings', route : '/home/settings/rfi-settings'},
             { label: 'Organisations', route: '/home/settings/organisations' },
             { label: 'users', route: '/home/settings/users' },
           ],

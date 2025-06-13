@@ -10,17 +10,18 @@
             <h2 class="text-lg font-bold mb-4">Global Colour Settings</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
               <!-- Hover Colour -->
-              <div class="relative">
+                <div class="relative">
                 <label class="block text-sm font-medium mb-1">Hover Colour</label>
                 <input type="text" formControlName="hoverColour"
-                       [style.color]="editForm.get('hoverColour')?.value"
-                       (click)="openColourPicker('hover')"
-                       mat-input
-                       />
+                [style.color]="editForm.get('hoverColour')?.value"
+                (click)="openColourPicker('hover')"
+                matInput
+                class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg"
+                />
                 <div *ngIf="visiblePicker === 'hover'" class="absolute top-4 left-4 z-10">
                   <color-sketch [color]="editForm.get('hoverColour')?.value"
-                                (onChangeComplete)="updateColour($event, 'hoverColour')"
-                                (mouseup)="closeColourPicker()"></color-sketch>
+                  (onChangeComplete)="updateColour($event, 'hoverColour')"
+                  (mouseup)="closeColourPicker()"></color-sketch>
                 </div>
               </div>
 
@@ -30,7 +31,7 @@
                 <input type="text" formControlName="highlightColour"
                        [style.color]="editForm.get('highlightColour')?.value"
                        (click)="openColourPicker('highlight')"
-                       class="w-full border rounded px-3 py-2" />
+                       class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg" />
                 <div *ngIf="visiblePicker === 'highlight'" class="absolute top-4 left-4 z-10">
                   <color-sketch [color]="editForm.get('highlightColour')?.value"
                                 (onChangeComplete)="updateColour($event, 'highlightColour')"
@@ -44,7 +45,7 @@
                 <input type="text" formControlName="enabledButtonColour"
                        [style.color]="editForm.get('enabledButtonColour')?.value"
                        (click)="openColourPicker('enabled')"
-                       class="w-full border rounded px-3 py-2" />
+                       class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg" />
                 <div *ngIf="visiblePicker === 'enabled'" class="absolute top-4 left-4 z-10">
                   <color-sketch [color]="editForm.get('enabledButtonColour')?.value"
                                 (onChangeComplete)="updateColour($event, 'enabledButtonColour')"
@@ -58,7 +59,7 @@
                 <input type="text" formControlName="hoveredButtonColour"
                        [style.color]="editForm.get('hoveredButtonColour')?.value"
                        (click)="openColourPicker('hovered')"
-                       class="w-full border rounded px-3 py-2" />
+                       class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg" />
                 <div *ngIf="visiblePicker === 'hovered'" class="absolute top-4 left-4 z-10">
                   <color-sketch [color]="editForm.get('hoveredButtonColour')?.value"
                                 (onChangeComplete)="updateColour($event, 'hoveredButtonColour')"
@@ -75,28 +76,28 @@
                 <div>
                   <label class="block text-sm font-medium mb-1">Phone Number</label>
                   <input formControlName="phoneNumber" type="text" placeholder="Phone Number"
-                         class="w-full border rounded px-3 py-2">
+                         class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg">
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1">Mobile Number</label>
                   <input formControlName="mobileNumber" type="text" placeholder="Mobile Number"
-                         class="w-full border rounded px-3 py-2">
+                         class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg">
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1">Email Address</label>
                   <input formControlName="emailAddress" type="text" placeholder="Email Address"
-                         class="w-full border rounded px-3 py-2">
+                         class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg">
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1">Company Name</label>
                   <input formControlName="pdfCompanyName" type="text" placeholder="Company Name"
-                         class="w-full border rounded px-3 py-2">
+                         class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg">
                 </div>
               </div>
               <div class="mt-4">
                 <label class="block text-sm font-medium mb-1">Address</label>
                 <input formControlName="address" type="text" placeholder="Address"
-                       class="w-full border rounded px-3 py-2">
+                       class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg">
               </div>
             </div>
 
@@ -106,7 +107,7 @@
               <div class="mb-4">
                 <label class="block text-sm font-medium mb-1">Admin Notification Email</label>
                 <input formControlName="adminNotificationEmail" type="text" placeholder="Admin Email"
-                       class="w-full border rounded px-3 py-2">
+                       class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg">
               </div>
               <div class="mb-4">
                 <label class="block text-sm font-medium mb-1">Text Signature</label>
@@ -118,7 +119,7 @@
                 <label class="block text-sm font-medium mb-1">Email Signature</label>
                 <textarea rows="5" maxlength="6000" formControlName="emailSignature"
                           placeholder="Copy and Paste your HTML Signature here"
-                          class="w-full border rounded px-3 py-2"></textarea>
+                          class="peer h-10 w-full rounded-md bg-gray-50 px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg"></textarea>
                 <span class="text-blue-600 cursor-pointer underline" data-toggle="modal" data-target="#myModal">Preview</span>
               </div>
             </div>
